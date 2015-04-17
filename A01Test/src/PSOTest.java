@@ -4,32 +4,30 @@ import java.util.Random;
 
 public class PSOTest {
 
-	//¦U­Ólocal ¦ì¸m
+	//å„å€‹local ä½ç½®
 	static double[] px;
 	static double[] py;
 	
-	//xsin(4x)+1.1ysin(2y)­È
+	//xsin(4x)+1.1ysin(2y)å€¼
 	static double[] cost;
 	
-	//¦U­Óxi,yi³Ì¨Îlocal¦ì¸m
+	//å„å€‹xi,yiæœ€ä½³localä½ç½®
 	static double[] Bpx;
 	static double[] Bpy;
 	
-	//¦U­Ó¦ì²¾
+	//å„å€‹ä½ç§»
 	static double[] vx;
 	static double[] vy;
 	
-	//³Ì¨Îglobal¦ì¸m
+	//æœ€ä½³globalä½ç½®
 	static double BGx;
 	static double BGy;
 	
-	//³Ì¨Îglobal­È
+	//æœ€ä½³globalå€¼
 	static double BGlobal;
-	static double k1;
-	static double k2;
 	
-	static final int Swarm = 30; //50-100
-	static final int TestNumber = 200; //key 1
+	static final int Swarm = 30;
+	static final int TestNumber = 200;
 	
 	/**
 	 * @param args
@@ -37,7 +35,7 @@ public class PSOTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		//ªì©l¤Æ
+		//åˆå§‹åŒ–
 		px = new double[Swarm];
 		py = new double[Swarm];
 		cost = new double[Swarm];
@@ -62,26 +60,22 @@ public class PSOTest {
 			vx[i] = Math.random();
 			vy[i] = Math.random();		
 		}
-		/* ²Ä¤G¥N */
 		
-
 		for(int j = 0; j<TestNumber; j++)
 		{
 			countAndfindBest();
 			velocity();
-			nextPosition();		
-			// k=k+0.1;
+			nextPosition();				
 		}
 		
 		countAndfindBest();
 		
 		System.out.printf("X: %f \n", BGx);
 		System.out.printf("Y: %f \n", BGy);
-		System.out.printf("³Ì¤p­È: %f \n", BGlobal);
-		
+		System.out.printf("æœ€å°å€¼: %f \n", BGlobal);
 	}
 	
-	//­pºâxsin(4x)+1.1ysin(2y)­È¡A¨Ã§ä¥X xi,yi Local¤ÎGlobal³Ì¤p­È
+	//è¨ˆç®—xsin(4x)+1.1ysin(2y)å€¼ï¼Œä¸¦æ‰¾å‡º xi,yi LocalåŠGlobalæœ€å°å€¼
 	public static void countAndfindBest()
 	{
 		double temp = 0;	
@@ -107,21 +101,17 @@ public class PSOTest {
 		}
 	}
 		
-	//ºâ¦ì²¾
+	//ç®—ä½ç§»
 	public static void velocity()
 	{
-		// Math.random ±`¼Æ
 		for(int i = 0; i < px.length; i++)
-		{  //key 1
-			//vx[i] = (0.8*vx[i])+(2.1*Math.random()*(Bpx[i]-px[i]))+(2.1*Math.random()*(BGx-px[i]));
-			//vy[i] = (0.8*vy[i])+(2.1*Math.random()*(Bpy[i]-py[i]))+(2.1*Math.random()*(BGy-py[i]));				
-			vx[i] = (k1*vx[i])+(k2*Math.random()*(Bpx[i]-px[i]))+(k2*Math.random()*(BGx-px[i]));
-			vy[i] = (k1*vy[i])+(k2*Math.random()*(Bpy[i]-py[i]))+(k2*Math.random()*(BGy-py[i]));				
-
+		{
+			vx[i] = (0.8*vx[i])+(2.1*Math.random()*(Bpx[i]-px[i]))+(2.1*Math.random()*(BGx-px[i]));
+			vy[i] = (0.8*vy[i])+(2.1*Math.random()*(Bpy[i]-py[i]))+(2.1*Math.random()*(BGy-py[i]));				
 		}	
 	}
 	
-	//¤U­Ó¦ì¸m
+	//ä¸‹å€‹ä½ç½®
 	public static void nextPosition()
 	{
 		double temp = 0;
@@ -134,7 +124,7 @@ public class PSOTest {
 				px[i] = temp;
 			}
 			temp = py[i]+vy[i];
-			if(temp >= 0 && temp <= 10) //¶W¥X½d³ò
+			if(temp >= 0 && temp <= 10)
 			{
 				py[i] = temp;
 			}
